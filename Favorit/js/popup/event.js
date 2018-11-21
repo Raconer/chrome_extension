@@ -44,6 +44,16 @@ $(document).ready(function() {
     formDataSet(rowData(id));
   });
 
+  // Data Setting Event
+  $('input[name=set]').on('click', function(){
+    event.preventDefault();
+
+  //  localStorage.clear();
+    var thisData = rowData();
+    formDataSet(thisData);
+    subController(1);
+  });
+
   // Sub Cancel Event
   $('input[name=cancel]').on('click', function(data) {
     subController(0);
@@ -66,16 +76,6 @@ $(document).ready(function() {
     if (formCheck(data)) {
       saveData(data);
     }
-  });
-
-  // Data Setting Event
-  $('input[name=set]').on('click', function(){
-    event.preventDefault();
-
-    localStorage.clear();
-  /*  var thisData = rowData();
-    formDataSet(thisData);
-    subController(1);*/
   });
 
   // State Change Event
