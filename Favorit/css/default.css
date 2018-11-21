@@ -1,0 +1,28 @@
+body {margin: 0px; padding: 0px;}
+label {display: table-cell;}
+label:hover {background: coral; }
+
+input[type=radio].none {display: none;}
+input[type=radio] + label { cursor: pointer;}
+input[type=radio]:checked + label { background : pink; font-style: normal;}
+ul { display: table-row;}
+ul li{ list-style: none;  float: left; }
+
+.main { min-width: 300px; background: red;}
+.sub {width: 300px; height: 80px; background: green; display: none;}
+.contain { background: gray;}
+.data_table { min-height: 250px; background: yellow;}
+.interface { width: 100%;  background: blue; display: table-cell; cursor: pointer;}
+.interface_btn { width: 30px; height: 30px;}
+.right { float: right;}
+.left { float: left;}
+.inputSet {width : 100%; display: block; margin-bottom: 10px}
+.sub_center { width: 90%; margin:10px auto;}
+
+.default_backColor { background: pink;}
+
+/*
+  input[type=text]{ width: 99%; }
+  input[type=button]{ width: 45px; }
+  input[name=add_btn]{ background-image: url("/images/interface/plus.png");}
+*/
