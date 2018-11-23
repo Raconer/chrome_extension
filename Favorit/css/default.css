@@ -9,7 +9,7 @@ ul { display: table-row;}
 ul li{ list-style: none;  float: left; }
 
 .main { min-width: 300px; background: red;}
-.sub {width: 300px; height: 80px; background: green; display: none;}
+.sub {width: 300px; background: green; display: table-cell;}
 .contain { background: gray;}
 .data_table { min-height: 250px; background: yellow;}
 .interface { width: 100%;  background: blue; display: table-cell; cursor: pointer;}

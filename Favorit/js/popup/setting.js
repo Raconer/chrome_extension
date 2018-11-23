@@ -5,6 +5,7 @@ function saveData(data) {
                     level: "1"
                  };*/
   var curData = $('input:radio[id='+data.id+']');
+  var fakeId = data.id;
   var dataList = readDataList();
   var length = dataList.length;
   var id = 0;
@@ -17,6 +18,11 @@ function saveData(data) {
 
   dataList.push(data);
   saveDataList(dataList);
+
+  curData.attr('id', id);
+  curData.siblings('label').attr('for', id);
+  subController(1, data);
+
   alert('save sucess');
 }
 
@@ -49,9 +55,11 @@ function readData(filterId){
 function remove(removeId){
     var dataList = readDataList();
     var index = dataList.findIndex(function(data){
+
       return data.id == removeId;
     });
-
-    dataList.splice(index, 1);
-    saveDataList(dataList);
+    if(index >= 0){
+      dataList.splice(index, 1);
+      saveDataList(dataList);
+    }
 }

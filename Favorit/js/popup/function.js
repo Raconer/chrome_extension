@@ -2,11 +2,10 @@
 function onLoadList() {
   var dataList = readDataList();
   var html = "";
-
-
   for (var i = 0; i < dataList.length; i++) {
     html += dataGrid(dataList[i]);
   }
+
   $('tbody').after(html);
   if (dataList.length > 0) {
     $('input:radio[id=' + dataList[0].id + ']').attr("checked", true);
@@ -16,7 +15,7 @@ function onLoadList() {
 // data convert html
 function dataGrid(data) {
   var tableStringPre = '<tr><td><input type=\'radio\' id=\'' + data.id + '\' name="favorit" data-level=\'' + data.level + '\' data-pid=\'' + data.pId + '\'  data-state= \'' + data.state + '\' class="none" ><label for=\'' + data.id + '\' title=\'' + data.describe + '\'>';
-  var favorit = '<ul><li id=\'level\'>' + levelConvert(data.level) + '</li><li id=\'state\'>(' + data.state + ')</li><li id=\'name\' data-url=\'' + data.url + '\'>' + data.name + '</li>';
+  var favorit = '<ul><li id=\'level\'>' + levelConvert(data.level) + '</li><li id=\'state\' data-state=\''+data.state+'\'>(' + data.state + ')</li><li id=\'name\' data-url=\'' + data.url + '\'>' + data.name + '</li>';
   var tableStringPost = '</label></td></tr>';
   return tableStringPre + favorit + tableStringPost;
 }
@@ -36,6 +35,7 @@ function returnFormData(form) {
   // serializeArray form요소를 name과 value로 인코딩
   var formData = form.serializeArray();
   var returnJsonData = {};
+
   for (var i = 0; i < formData.length; i++) {
     returnJsonData[formData[i].name] = formData[i].value;
   }
@@ -67,28 +67,44 @@ function formCheck(jsonFormData) {
   return result;
 }
 
-// Setting Sub
+// Setting Sub _ will delete
 function formDataSet(thisData) {
-
-  var curThis = thisData.siblings('label');
+  var curThis = $(thisData).siblings('label');
+  var name = curThis.find('li[id=name]').text();
+  var state = curThis.find('li[id=state]').data('state');
   var url = curThis.find('li[id=name]').data('url');
-  var title = curThis.attr('title');
+  var describe = curThis.attr('title');
 
-  $('#default_form input[name=id]').val(thisData.attr('id'));
-  $('#default_form input[name=name]').val(curThis.find('li[id=name]').text());
-  $('#default_form input[name=url]').val(url);
-  $('#default_form input[name=describe]').val(title);
+  return {
+        id        : thisData.id,
+        name      : name      && !(name in window)  ?name:'',
+        state     : state,
+        url       : url       && !(url in window)   ?url:'',
+        describe  : describe  && !(describe in window)  ?describe:''
+  };
 }
 
 // Sub State
-function subController(state) {
-  var sub = $('.sub');
-  var interface = $('.interface');
+function subController(state, tempData) {
+
   if (state == 1) {
-    sub.css('display', 'inline-table');
-    interface.css('display', 'none');
+    $('.sub').load('./sub.html', tempData, function(){
+      $('#sub_id').val(tempData.id);
+      $('#sub_name').val(tempData.name);
+      $('#sub_url').val(tempData.url);
+      $('#sub_des').val(tempData.describe);
+      urlController(tempData.state);
+    });
   } else if (state == 0) {
-    sub.css('display', 'none');
-    interface.css('display', 'table-cell');
+    $('.sub_center').detach();
   }
+}
+
+function urlController(state){
+  if (state == 'url') {
+    urlInput().css('display', 'block');
+  } else if (state == 'dir') {
+    urlInput().css('display', 'none');
+  }
+  rowData(state).attr("checked", true);
 }

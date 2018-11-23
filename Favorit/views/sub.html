@@ -1,0 +1,18 @@
+<div class="sub_center">
+  <input type="button" class="right" name="cancel" value="cancel">
+  <form method="post" id="default_form">
+    <input type="radio" id="url"  name="state" value="url" class="none">
+    <label for="url">URl</label>
+    <input type="radio" id="dir" name="state" value="dir" class="none">
+    <label for="dir">DIR</label>
+    <!-- onfoucs <-> onblur :focus일때 focus를 잃었을때 -->
+    <div id="data" class="default_backColor">
+      <input type="hidden" id="sub_id" name='id'>
+      <input type="text" id="sub_name" name='name'  class="inputSet" placeholder="name" title="name title">
+      <input type="text" id="sub_url"  name='url'   class="inputSet" placeholder="url"   title="url title">
+      <input type="text" id="sub_des"  name='describe' class="inputSet" placeholder="describe"  title="describe title">
+    </div>
+      <input type="button" class="right" name="delete" value="delete">
+      <input type="submit" class="right" name="save" value="save">
+  </form>
+</div>
