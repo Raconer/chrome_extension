@@ -4,9 +4,8 @@ function onLoadList() {
   var html = "";
 
   for (var i = 0; i < dataList.length; i++) {
-
+  //  console.log(dataList[i].id +'/'+ dataList[i].pId);
     html += dataGrid(dataList[i]);
-
   }
 
   $('tbody').after(html);

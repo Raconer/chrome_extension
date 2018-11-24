@@ -6,6 +6,8 @@ $(document).ready(function() {
   // Add BTN Event
   $('input[name=add]').on('click', function(data) {
 
+    // 1. dir 일때만 레벨 +1, dir의 부모
+    // 2. url 일경우 같은 레벨 같은 부모
     event.preventDefault();
     var list = readDataList();
     var id = "temp_" + $('#grid input').length;
@@ -13,7 +15,7 @@ $(document).ready(function() {
     var pId = parent.attr('id');
     var level = parent.data('level');
     var state = parent.data('state');
-
+    console.log(pId);
     level = level ? level : 0;
     pId = pId? pId : 0;
 
@@ -25,7 +27,7 @@ $(document).ready(function() {
     var tempData = {
       id: id,
       pId: pId,
-      level: level,
+      level: state == 'dir'? level+1:level,
       state: 'url',
       name: '',
       url: '',
@@ -49,11 +51,11 @@ $(document).ready(function() {
   $('input[name=set]').on('click', function() {
     event.preventDefault();
 
-    //localStorage.clear();
-    var thisData = rowData();
+    localStorage.clear();
+  /*  var thisData = rowData();
 
     thisData.id = thisData.attr('id');
-    subController(1, formDataSet(thisData));
+    subController(1, formDataSet(thisData));*/
   });
 
   // Sub Cancel Event

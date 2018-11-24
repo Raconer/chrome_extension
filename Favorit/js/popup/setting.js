@@ -5,10 +5,9 @@ function saveData(data) {
                     level: "1"
                  };*/
   var curData = $('input:radio[id='+data.id+']');
-  var fakeId = data.id;
   var dataList = readDataList();
   var length = dataList.length;
-  var id = 0;
+  var id = 1;
   if(length > 0){
     id = (dataList[dataList.length - 1].id + 1 );
   }
