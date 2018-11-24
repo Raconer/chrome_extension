@@ -58,7 +58,6 @@ $(document).ready(function() {
       getUl(newDataId).css('zoom', 1.2);
       radioCheck(newDataId);
       subDataSetting(newDataId, true);
-      wrapWindowByMask();
     }else{
       alert("check data");
     }
