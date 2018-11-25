@@ -1,10 +1,10 @@
 <div class="sub_center">
-  <input type="button" class="right" name="cancel" value="cancel">
+  <input type="button" id="cancel"  name="cancel" value="cancel">
   <form method="post" id="sub_form">
-    <input type="radio" id="sub_url"  name="sub_state" value="0">
-    <label for="sub_url">URl</label>
-    <input type="radio" id="sub_dir" name="sub_state" value="1">
-    <label for="sub_dir">DIR</label>
+    <input type="radio" id="sub_sUrl"  name="sub_state" value="0" checked>
+    <label for="sub_sUrl">URl</label>
+    <input type="radio" id="sub_sDir"  name="sub_state" value="1">
+    <label for="sub_sDir">DIR</label>
     <!-- onfoucs <-> onblur :focus일때 focus를 잃었을때 -->
     <div id="data" class="default_backColor">
       <input type="hidden" id="sub_id"  name='sub_id'>

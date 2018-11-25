@@ -16,7 +16,6 @@ function getData(id) {
   return data;
 }
 
-
 function setDataList(dataList){
   localStorage.setItem('WebDataList', JSON.stringify(dataList));
 }

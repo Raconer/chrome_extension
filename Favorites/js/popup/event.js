@@ -41,6 +41,7 @@ $(document).ready(function() {
   $(document).on('click','input:button[name=set]', function(){
     var checkDataId = getRadioID();
     if(checkDataId){
+      interfaceSetting(false);
       subDataSetting(checkDataId, false);
     }else{
       alert("check data");
@@ -69,8 +70,10 @@ $(document).ready(function() {
     var newDataId = resetId();
     radioCheck(newDataId);
     subDataSetting(newDataId, true);
+    interfaceSetting(false);
   });
 
+  // save event
   $(document).on('submit', '#sub_form', function(){
     event.preventDefault();
     var data = formDataSet($(this));
@@ -80,7 +83,19 @@ $(document).ready(function() {
     saveDataJSON.name = data.sub_title;
     saveDataJSON.url = data.sub_url;
     saveDataJSON.state = data.sub_state;
+    saveDataJSON.level = getInput(saveDataJSON.id).data('level');
 
     saveData(saveDataJSON);
+  });
+
+  // sub_cancel
+  $(document).on('click', 'input:button[id=cancel]', function(){
+    interfaceSetting(true);
+    subDetach();
+  });
+
+  $(document).on('click', 'input:button[id=sub_del]', function(){
+    console.log(getInput(subId()).parent());
+    getInput(subId()).parents('ul').eq(0).remove();
   });
 });

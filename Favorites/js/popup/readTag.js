@@ -9,3 +9,7 @@ function getInput(id) {
 function getUl(id) {
   return getInput(id).closest('ul');
 }
+
+function subId() {
+  return $('input:hidden[id=sub_id]').val();
+}

@@ -20,7 +20,7 @@ function onLoadList(){
     listHtml = mkHtmlList(dataList)
   }
   $('.main').append(listHtml);
-  $('.interface').load('./interface.html');
+  interfaceSetting(true);
 }
 
 // convert dataList to html
@@ -56,7 +56,7 @@ function mkHtmlData(data, end) { // data id, data name, last add string
   var ul ='<ul>';
   var li ='<li>', sli = '</li>';
   var input = "<input type='radio' id='"+ data.id +"' name='list' data-state='"+data.state+"' data-level='"+data.level+"'>"
-  var label = "<label for='"+data.id+"'>"+ (data.state?'(dir)':'(url)') + data.name +"</label>"
+  var label = "<label for='"+data.id+"'>"+ (data.state == 1?'(dir)':'(url)') + data.name +"</label>"
   var dataHtml = ul + li + input + label + sli + end;
 
   return dataHtml;
@@ -64,6 +64,7 @@ function mkHtmlData(data, end) { // data id, data name, last add string
 
 // sub data Setting
 function subDataSetting(id, isNew) { // id, isNew(newData : true, existing data : false)
+
   var data = getData(id);
 
   if(isNew){
@@ -77,6 +78,19 @@ function subDataSetting(id, isNew) { // id, isNew(newData : true, existing data 
     $('#sub_url').val(data.url);
     $('#sub_des').val(data.describe);
   });
+}
+// sub detch
+function subDetach() {
+  $('.sub_center').detach();
+}
+// interface show
+function interfaceSetting(screen) {
+  if(screen){
+      $('.interface').load('./interface.html');
+  }else{
+    $('.interface_div').detach();
+  }
+
 }
 
 // Id reset
@@ -119,6 +133,7 @@ function saveData(data) {
 function formDataSet(formData){
   var data = formData.serializeArray();
   var tempData = {};
+
   for(var i = 0; i <  data.length; i++){
     tempData[data[i].name] = data[i].value;
   }
