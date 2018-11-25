@@ -50,17 +50,37 @@ $(document).ready(function() {
   // Data Add Event
   $(document).on('click', 'input:button[name=add]', function(){
     var checkDataId = getRadioID();
-    /* 하위 일경우 append*/
-    /* 같은 레벨일경우 after*/
+    var state =  getInput(checkDataId).data('state');
+    var level = getInput(checkDataId).data('level');
+    var data = defaultJson();
+
     if(checkDataId){
-      getUl(checkDataId).after(mkHtmlData(defaultJson(),'</ul>'));
-      var newDataId = resetId();
-      getUl(newDataId).css('zoom', 1.2);
-      radioCheck(newDataId);
-      subDataSetting(newDataId, true);
+      if(state){/* 하위 일경우 append */
+        data.level = level + 1;
+        getUl(checkDataId).append(mkHtmlData(data,'</ul>'));
+      }else{ /* 같은 레벨일경우 after */
+        data.level = level;
+        getUl(checkDataId).after(mkHtmlData(data,'</ul>'));
+      }
     }else{
-      alert("check data");
+      $('.main').append(mkHtmlData(data,'</ul>'));
     }
 
+    var newDataId = resetId();
+    radioCheck(newDataId);
+    subDataSetting(newDataId, true);
+  });
+
+  $(document).on('submit', '#sub_form', function(){
+    event.preventDefault();
+    var data = formDataSet($(this));
+    var saveDataJSON = defaultJson(data.sub_id);
+
+    saveDataJSON.describe = data.sub_describe;
+    saveDataJSON.name = data.sub_title;
+    saveDataJSON.url = data.sub_url;
+    saveDataJSON.state = data.sub_state;
+
+    saveData(saveDataJSON);
   });
 });

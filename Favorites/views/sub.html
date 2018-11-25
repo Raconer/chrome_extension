@@ -1,10 +1,10 @@
 <div class="sub_center">
   <input type="button" class="right" name="cancel" value="cancel">
-  <form method="post" id="default_form">
-    <input type="radio" id="url"  name="state" value="url" class="none">
-    <label for="url">URl</label>
-    <input type="radio" id="dir" name="state" value="dir" class="none">
-    <label for="dir">DIR</label>
+  <form method="post" id="sub_form">
+    <input type="radio" id="sub_url"  name="sub_state" value="0">
+    <label for="sub_url">URl</label>
+    <input type="radio" id="sub_dir" name="sub_state" value="1">
+    <label for="sub_dir">DIR</label>
     <!-- onfoucs <-> onblur :focus일때 focus를 잃었을때 -->
     <div id="data" class="default_backColor">
       <input type="hidden" id="sub_id"  name='sub_id'>
@@ -12,7 +12,7 @@
       <input type="text" id="sub_url"   name='sub_url'      class="inputSet" placeholder="url"      >
       <input type="text" id="sub_des"   name='sub_describe' class="inputSet" placeholder="describe" >
     </div>
-      <input type="button" name="delete"  value="delete">
-      <input type="submit" name="save"    value="save">
+      <input type="button" id="sub_del" name="delete"  value="delete">
+      <input type="submit" id="sub_save" name="save"    value="save">
   </form>
 </div>

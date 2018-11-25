@@ -1,6 +1,6 @@
-function defaultJson() {
+function defaultJson(id) {
   var defaultModel =   {
-      id        :'',         // Primary Key (int)
+      id        :id?id:'',  // Primary Key (int)
       state     :0,         // 0:url, 1:dir
       level     :0,         // int
       name      :"",        // String
@@ -55,7 +55,7 @@ function mkHtmlList(dataList){// dataList = json type
 function mkHtmlData(data, end) { // data id, data name, last add string
   var ul ='<ul>';
   var li ='<li>', sli = '</li>';
-  var input = "<input type='radio' id='"+ data.id +"' name='list' data-state='"+data.state+"'>"
+  var input = "<input type='radio' id='"+ data.id +"' name='list' data-state='"+data.state+"' data-level='"+data.level+"'>"
   var label = "<label for='"+data.id+"'>"+ (data.state?'(dir)':'(url)') + data.name +"</label>"
   var dataHtml = ul + li + input + label + sli + end;
 
@@ -84,7 +84,6 @@ function resetId() {
   var newId;
   $('input:radio[name=list]').each(function(index){
     var id = index + 1;
-    console.log($(this).attr('id'));
     if(!$(this).attr('id')){
       newId = id;
     }
@@ -98,4 +97,30 @@ function resetId() {
 // radio check with id
 function radioCheck(id) {
   $("input:radio[id='"+id+"']").attr('checked', true);
+}
+
+// Insert Data
+function saveData(data) {
+  var dataList = getDataList();
+  var i = 0;
+  if(dataList){
+    dataList.splice(data.id-1, 0, data);
+    dataList.forEach(function(data){
+      data.id = i++;
+    });
+  }else{
+    dataList = new Array();
+    dataList.push(data);
+  }
+  setDataList(dataList);
+}
+
+// for data convert json
+function formDataSet(formData){
+  var data = formData.serializeArray();
+  var tempData = {};
+  for(var i = 0; i <  data.length; i++){
+    tempData[data[i].name] = data[i].value;
+  }
+  return tempData;
 }
