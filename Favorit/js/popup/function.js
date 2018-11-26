@@ -3,6 +3,10 @@ function onLoadList() {
   var dataList = readDataList();
   var html = "";
   for (var i = 0; i < dataList.length; i++) {
+<<<<<<< HEAD
+=======
+  //  console.log(dataList[i].id +'/'+ dataList[i].pId);
+>>>>>>> 20d7629795132950165bff8c14514472920af787
     html += dataGrid(dataList[i]);
   }
 

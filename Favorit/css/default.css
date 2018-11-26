@@ -8,9 +8,10 @@ input[type=radio]:checked + label { background : pink; font-style: normal;}
 ul { display: table-row;}
 ul li{ list-style: none;  float: left; }
 
+.contain { background: gray;}
+
 .main { min-width: 300px; background: red;}
 .sub {width: 300px; background: green; display: table-cell;}
-.contain { background: gray;}
 .data_table { min-height: 250px; background: yellow;}
 .interface { width: 100%;  background: blue; display: table-cell; cursor: pointer;}
 .interface_btn { width: 30px; height: 30px;}

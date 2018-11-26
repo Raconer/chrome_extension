@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Favorit Website",
+  "version": "1.0.0",
+
+  "description": "Favorit Web Site Save in other Computer",
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_popup": "views/popup.html",
+    "default_icon": {
+      "16": "images/icon/star_16.png",
+      "24": "images/icon/star_24.png",
+      "32": "images/icon/star_32.png",
+      "64": "images/icon/star_64.png"
+    }
+  },
+  "icons":{
+      "16": "images/icon/star_16.png",
+      "24": "images/icon/star_24.png",
+      "32": "images/icon/star_32.png",
+      "64": "images/icon/star_64.png"
+  },
+
+  "background":{
+    "scripts": ["/js/background/background.js"]
+  }
+}
