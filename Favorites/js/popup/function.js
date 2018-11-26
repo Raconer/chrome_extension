@@ -17,7 +17,7 @@ function onLoadList(){
 
   var listHtml = '';
   if (dataList) {
-    listHtml = mkHtmlList(dataList)
+    listHtml = mkHtmlList(dataList);
   }
   $('.main').append(listHtml);
   interfaceSetting(true);
@@ -55,8 +55,8 @@ function mkHtmlList(dataList){// dataList = json type
 function mkHtmlData(data, end) { // data id, data name, last add string
   var ul ='<ul>';
   var li ='<li>', sli = '</li>';
-  var input = "<input type='radio' id='"+ data.id +"' name='list' data-state='"+data.state+"' data-level='"+data.level+"'>"
-  var label = "<label for='"+data.id+"'>"+ (data.state == 1?'(dir)':'(url)') + data.name +"</label>"
+  var input = "<input type='radio' id='"+ data.id +"' name='list' data-state='"+data.state+"' data-level='"+data.level+"'>";
+  var label = "<label for='"+data.id+"'>"+ (data.state == 1?'(dir)':'(url)') + data.name +"</label>";
   var dataHtml = ul + li + input + label + sli + end;
 
   return dataHtml;
@@ -116,14 +116,17 @@ function radioCheck(id) {
 // Insert Data
 function saveData(data) {
   var dataList = getDataList();
+  var outLength = outPutLength();
+
   var i = 0;
   if(dataList){
-    dataList.splice(data.id-1, 0, data);
+    var isSaveInsert = dataList.length - outLength;
+    dataList.splice(data.id - 1 , (isSaveInsert + 1), data);
     dataList.forEach(function(data){
-      data.id = i++;
+      data.id = ++i;
     });
   }else{
-    dataList = new Array();
+    dataList = [];
     dataList.push(data);
   }
   setDataList(dataList);
@@ -133,9 +136,14 @@ function saveData(data) {
 function formDataSet(formData){
   var data = formData.serializeArray();
   var tempData = {};
-
   for(var i = 0; i <  data.length; i++){
     tempData[data[i].name] = data[i].value;
   }
   return tempData;
+}
+
+// sub-off, interface-on
+function interfaceMode() {
+  subDetach();
+  interfaceSetting(true);
 }

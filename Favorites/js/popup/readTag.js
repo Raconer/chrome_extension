@@ -13,3 +13,7 @@ function getUl(id) {
 function subId() {
   return $('input:hidden[id=sub_id]').val();
 }
+
+function outPutLength() {
+  return $('.main input:radio[name=list]').length;
+}
