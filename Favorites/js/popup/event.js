@@ -86,20 +86,17 @@ $(document).ready(function() {
     saveDataJSON.level = getInput(saveDataJSON.id).data('level');
 
     saveData(saveDataJSON);
+
   });
 
   // sub_cancel
   $(document).on('click', 'input:button[id=cancel]', function(){
-    var id = subId();
-    var parent = getInput(id).parents('ul').eq(0);
-    parent.remove();
     interfaceMode();
   });
 
   $(document).on('click', 'input:button[id=sub_del]', function(){
     var id = subId();
     var parent = getInput(id).parents('ul').eq(0);
-    // 화면에서 제거
     parent.remove();
     remove(id);
     resetId();
