@@ -4,7 +4,7 @@
   "version": "1.0.0",
 
   "description": "Favorit Web Site Save in other Computer",
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "browser_action": {
     "default_popup": "views/popup.html",
     "default_icon": {

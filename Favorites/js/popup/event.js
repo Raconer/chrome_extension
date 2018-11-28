@@ -53,6 +53,10 @@ $(document).ready(function() {
     var level = getInput(checkDataId).data('level');
     var data = defaultJson();
 
+    chrome.tabs.getSelected(null, function(tab){
+      data.url = tab.url;
+    });
+
     if(checkDataId){
       if(state){/* 하위 일경우 append */
         data.level = level + 1;
