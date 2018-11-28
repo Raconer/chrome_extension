@@ -6,6 +6,10 @@ function getInput(id) {
   return $("input:radio[name=list][id='"+id+"']");
 }
 
+function getList(){
+  return $('input:radio[name=list]');
+}
+
 function getUl(id) {
   return getInput(id).closest('ul');
 }

@@ -1,3 +1,4 @@
+// JSON Model
 function defaultJson(id) {
   var defaultModel =   {
       id        :id?id:'',  // Primary Key (int)
@@ -56,7 +57,7 @@ function mkHtmlData(data, end) { // data id, data name, last add string
   var ul ='<ul>';
   var li ='<li>', sli = '</li>';
   var input = "<input type='radio' id='"+ data.id +"' name='list' data-state='"+data.state+"' data-level='"+data.level+"'>";
-  var label = "<label for='"+data.id+"'>"+ (data.state == 1?'(dir)':'(url)') + data.name +"</label>";
+  var label = "<label for='"+data.id+"' data-url='"+data.url+"'>"+ (data.state == 1?'(dir)':'(url)') + data.name +"</label>";
   var dataHtml = ul + li + input + label + sli + end;
 
   return dataHtml;
@@ -77,8 +78,12 @@ function subDataSetting(id, isNew) { // id, isNew(newData : true, existing data 
     $('#sub_title').val(data.name);
     $('#sub_url').val(data.url);
     $('#sub_des').val(data.describe);
+    if(isNew){
+      $('#cancel').remove();
+    }
   });
 }
+
 // sub detch
 function subDetach() {
   $('.sub_center').detach();
@@ -90,7 +95,6 @@ function interfaceSetting(screen) {
   }else{
     $('.interface_div').detach();
   }
-
 }
 
 // Id reset
@@ -146,4 +150,9 @@ function formDataSet(formData){
 function interfaceMode() {
   subDetach();
   interfaceSetting(true);
+}
+
+// radio list disable
+function listDisabled(isDisabled) {
+    getList().prop("disabled", isDisabled);
 }

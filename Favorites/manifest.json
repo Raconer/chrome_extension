@@ -20,8 +20,7 @@
       "32": "images/icon/star_32.png",
       "64": "images/icon/star_64.png"
   },
-
   "background":{
-    "scripts": ["/js/background/background.js"]
+    "scripts": ["./js/background/background.js"]
   }
 }

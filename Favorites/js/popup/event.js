@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 /*
   {
     "state"     :0,         // 0:url, 1:dir
@@ -32,9 +31,8 @@ $(document).ready(function() {
     localStorage.removeItem('WebDataList');
   });
 
-  $('label').on('click', function(){
-    // var id = $(this).attr('for');
-    // getData(id);
+  $("ul li input:radio + label").dblclick(function(){
+
   });
 
   // Data Setting Event
@@ -69,6 +67,7 @@ $(document).ready(function() {
 
     var newDataId = resetId();
     radioCheck(newDataId);
+    listDisabled(true);
     subDataSetting(newDataId, true);
     interfaceSetting(false);
   });
@@ -94,12 +93,14 @@ $(document).ready(function() {
     interfaceMode();
   });
 
+  // sub_delete event
   $(document).on('click', 'input:button[id=sub_del]', function(){
     var id = subId();
     var parent = getInput(id).parents('ul').eq(0);
     parent.remove();
     remove(id);
     resetId();
+    listDisabled(false);
     interfaceMode();
   });
 });
