@@ -21,6 +21,25 @@ function setDataList(dataList){
   localStorage.setItem('WebDataList', JSON.stringify(dataList));
 }
 
+// Insert Data
+function saveData(data) {
+  var dataList = getDataList();
+  var outLength = outPutLength();
+
+  var i = 0;
+  if(dataList){
+    var isSaveInsert = dataList.length - outLength;
+    dataList.splice(data.id - 1 , (isSaveInsert + 1), data);
+    dataList.forEach(function(data){
+      data.id = ++i;
+    });
+  }else{
+    dataList = [];
+    dataList.push(data);
+  }
+  setDataList(dataList);
+}
+
 // Data Remove
 function remove(removeId){
     var dataList = getDataList();

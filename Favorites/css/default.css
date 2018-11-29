@@ -43,5 +43,9 @@ input[data-state='1']+label{
 .sub {
   min-width: 300px;
   width: 100%;
+}
 
+/***drop down css***/
+ul li~ul[data-open='0']{
+  display: none;
 }

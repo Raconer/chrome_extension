@@ -6,15 +6,15 @@ function defaultJson(id) {
       level     :0,         // int
       name      :"",        // String
       url       :"",        // String
-      describe  :""         // String
+      describe  :"",        // String
+      open      :0          // 0:close, 1:open
     };
   return defaultModel;
 }
 
 // Early List Setting
 function onLoadList(){
-  var localdataList = localStorage.getItem('WebDataList');
-  var dataList = JSON.parse(localdataList);
+  var dataList = getDataList();
 
   var listHtml = '';
   if (dataList) {
@@ -54,7 +54,7 @@ function mkHtmlList(dataList){// dataList = json type
 
 // convert data to html
 function mkHtmlData(data, end) { // data id, data name, last add string
-  var ul ='<ul>';
+  var ul ="<ul data-open='"+data.open+"'>";
   var li ='<li>', sli = '</li>';
   var input = "<input type='radio' id='"+ data.id +"' name='list' data-state='"+data.state+"' data-level='"+data.level+"'>";
   var label = "<label for='"+data.id+"' data-url='"+data.url+"'>"+ getDataState(data.state)+ data.name + "</label>";
@@ -112,25 +112,6 @@ function resetId() {
 // radio check with id
 function radioCheck(id) {
   $("input:radio[id='"+id+"']").attr('checked', true);
-}
-
-// Insert Data
-function saveData(data) {
-  var dataList = getDataList();
-  var outLength = outPutLength();
-
-  var i = 0;
-  if(dataList){
-    var isSaveInsert = dataList.length - outLength;
-    dataList.splice(data.id - 1 , (isSaveInsert + 1), data);
-    dataList.forEach(function(data){
-      data.id = ++i;
-    });
-  }else{
-    dataList = [];
-    dataList.push(data);
-  }
-  setDataList(dataList);
 }
 
 // for data convert json

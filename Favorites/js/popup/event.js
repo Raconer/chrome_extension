@@ -14,15 +14,15 @@ $(document).ready(function() {
 
   $('#vertualDataList').on('click', function(){
     var dataList = [
-                        {"id":1, "state":1, "name":"1111111", "url":"1111111", "describe":"1111111", "level":0},
-                        {"id":2, "state":0, "name":"2222222", "url":"2222222", "describe":"2222222", "level":1},
-                        {"id":3, "state":0, "name":"3333333", "url":"3333333", "describe":"3333333", "level":1},
-                        {"id":4, "state":0, "name":"4444444", "url":"4444444", "describe":"4444444", "level":1},
-                        {"id":5, "state":1, "name":"5555555", "url":"5555555", "describe":"5555555", "level":0},
-                        {"id":6, "state":1, "name":"6666666", "url":"6666666", "describe":"6666666", "level":1},
-                        {"id":7, "state":1, "name":"7777777", "url":"7777777", "describe":"7777777", "level":2},
-                        {"id":8, "state":0, "name":"8888888", "url":"8888888", "describe":"8888888", "level":3},
-                        {"id":9, "state":0, "name":"9999999", "url":"9999999", "describe":"9999999", "level":0},
+                        {"id":1, "state":1, "name":"1111111", "url":"1111111", "describe":"1111111", "level":0, "open": 1},
+                        {"id":2, "state":0, "name":"2222222", "url":"2222222", "describe":"2222222", "level":1, "open": 0},
+                        {"id":3, "state":0, "name":"3333333", "url":"3333333", "describe":"3333333", "level":1, "open": 0},
+                        {"id":4, "state":0, "name":"4444444", "url":"4444444", "describe":"4444444", "level":1, "open": 0},
+                        {"id":5, "state":1, "name":"5555555", "url":"5555555", "describe":"5555555", "level":0, "open": 1},
+                        {"id":6, "state":1, "name":"6666666", "url":"6666666", "describe":"6666666", "level":1, "open": 1},
+                        {"id":7, "state":1, "name":"7777777", "url":"7777777", "describe":"7777777", "level":2, "open": 0},
+                        {"id":8, "state":0, "name":"8888888", "url":"8888888", "describe":"8888888", "level":3, "open": 0},
+                        {"id":9, "state":0, "name":"9999999", "url":"9999999", "describe":"9999999", "level":0, "open": 0},
                       ];
     localStorage.setItem('WebDataList', JSON.stringify(dataList));
   });
@@ -31,9 +31,21 @@ $(document).ready(function() {
     localStorage.removeItem('WebDataList');
   });
 
-  $("ul li input:radio + label").dblclick(function(){
+  $("ul li input:radio[name=list] + label").dblclick(function(){
     if(!getSibling($(this)).data('state')){
       window.open($(this).data('url'),'_blank');
+    }else{
+      var id = getSibling($(this)).attr('id');
+      var open = 'none';
+      var data = getData(id);
+      if(data.open == 1){
+        data.open = 0;
+      }else{
+        data.open = 1;
+        open = 'block';
+      }
+      getUl(id).children('ul').css('display', open);
+      saveData(data);
     }
   });
 
@@ -44,8 +56,6 @@ $(document).ready(function() {
       $('#sub_title').val(data.name);
       $('#sub_url').val(data.url);
       $('#sub_des').val(data.describe);
-    }else{
-
     }
   });
 
