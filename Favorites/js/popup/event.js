@@ -31,10 +31,8 @@ $(document).ready(function() {
     localStorage.removeItem('WebDataList');
   });
 
-  $("ul li input:radio[name=list] + label").dblclick(function(){
-    if(!getSibling($(this)).data('state')){
-      window.open($(this).data('url'),'_blank');
-    }else{
+  $("ul li input:radio[name=list] + label").click(function(){
+    if(getSibling($(this)).data('state')){
       var id = getSibling($(this)).attr('id');
       var open = 'none';
       var data = getData(id);
@@ -44,8 +42,15 @@ $(document).ready(function() {
         data.open = 1;
         open = 'block';
       }
+      getUl(id).children('ul').data('open', data.open);
       getUl(id).children('ul').css('display', open);
       saveData(data);
+    }
+  });
+
+  $("ul li input:radio[name=list] + label").dblclick(function(){
+    if(!getSibling($(this)).data('state')){
+      window.open($(this).data('url'),'_blank');
     }
   });
 
