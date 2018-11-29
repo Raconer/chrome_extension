@@ -32,14 +32,30 @@ $(document).ready(function() {
   });
 
   $("ul li input:radio + label").dblclick(function(){
+    if(!getSibling($(this)).data('state')){
+      window.open($(this).data('url'),'_blank');
+    }
+  });
 
+  $(document).on('change', 'input:radio[name=list]', function(){
+    var data = getData(this.id);
+    if(!data.state){
+      $('#sub_id').val(data.id);
+      $('#sub_title').val(data.name);
+      $('#sub_url').val(data.url);
+      $('#sub_des').val(data.describe);
+    }else{
+
+    }
   });
 
   // Data Setting Event
-  $(document).on('click','input:button[name=set]', function(){
+  $(document).on('click', 'input:button[name=set]', function(){
+    var data = defaultJson();
     var checkDataId = getRadioID();
     if(checkDataId){
-      subDataSetting(checkDataId, false);
+      data.id = checkDataId;
+      subDataSetting(data, false);
       interfaceSetting(false);
     }else{
       alert("check data");
@@ -49,12 +65,14 @@ $(document).ready(function() {
   // Data Add Event
   $(document).on('click', 'input:button[name=add]', function(){
     var checkDataId = getRadioID();
+    var newDataId = '';
     var state =  getInput(checkDataId).data('state');
     var level = getInput(checkDataId).data('level');
     var data = defaultJson();
 
     chrome.tabs.getSelected(null, function(tab){
       data.url = tab.url;
+      data.name = tab.title;
     });
 
     if(checkDataId){
@@ -69,16 +87,16 @@ $(document).ready(function() {
       $('.main').append(mkHtmlData(data,'</ul>'));
     }
 
-    var newDataId = resetId();
+    newDataId = resetId();
+    data.id = newDataId;
     radioCheck(newDataId);
     listDisabled(true);
-    subDataSetting(newDataId, true);
+    subDataSetting(data, true);
     interfaceSetting(false);
   });
 
   // save event
   $(document).on('submit', '#sub_form', function(){
-    event.preventDefault();
     var data = formDataSet($(this));
     var saveDataJSON = defaultJson(data.sub_id);
 
@@ -106,5 +124,21 @@ $(document).ready(function() {
     resetId();
     listDisabled(false);
     interfaceMode();
+  });
+
+  $(document).on('input', 'input:text', function(){
+    var inputName = this.name;
+    var id = $(this).siblings('input#sub_id').val();
+    if(inputName == 'sub_title'){
+      $("label[for="+id+"]").html(getDataTitle());
+    }else if(inputName == 'sub_url'){
+      $("label[for="+id+"]").data('url', this.value);
+    }
+  });
+
+  $(document).on('change', 'input:radio[name=sub_state]', function(){
+    var state = getDataState(this.value);
+    var id = subId();
+    $("label[for="+id+"]").html(getDataTitle());
   });
 });

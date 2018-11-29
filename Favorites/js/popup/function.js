@@ -57,20 +57,17 @@ function mkHtmlData(data, end) { // data id, data name, last add string
   var ul ='<ul>';
   var li ='<li>', sli = '</li>';
   var input = "<input type='radio' id='"+ data.id +"' name='list' data-state='"+data.state+"' data-level='"+data.level+"'>";
-  var label = "<label for='"+data.id+"' data-url='"+data.url+"'>"+ (data.state == 1?'(dir)':'(url)') + data.name +"</label>";
+  var label = "<label for='"+data.id+"' data-url='"+data.url+"'>"+ getDataState(data.state)+ data.name + "</label>";
   var dataHtml = ul + li + input + label + sli + end;
 
   return dataHtml;
 }
 
 // sub data Setting
-function subDataSetting(id, isNew) { // id, isNew(newData : true, existing data : false)
+function subDataSetting(data, isNew) { // id, isNew(newData : true, existing data : false)
 
-  var data = getData(id);
-
-  if(isNew){
-    data = defaultJson();
-    data.id = id;
+  if(!isNew){
+    data = getData(data.id);
   }
 
   $('.sub').load('./sub.html', data, function() {
@@ -154,5 +151,15 @@ function interfaceMode() {
 
 // radio list disable
 function listDisabled(isDisabled) {
+
     getList().prop("disabled", isDisabled);
+}
+
+function getDataState(state) {
+  return state == 1?'(dir)':'(url)';
+}
+
+function getDataTitle() {
+  return getDataState(subState())+subTitle();
+  //$("label[for="+id+"]").html(this.value);
 }

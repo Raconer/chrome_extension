@@ -2,50 +2,44 @@ body {
   margin: 0px;
   padding: 0px;
 }
-
 ul {
   padding: 0 0 0 10px;
   margin: 0px;
 }
-
 li {
   list-style: none;
 }
-
 input[type=radio]{
   display: none;
 }
-
 input[type=radio]:checked + label{
   background: aqua;
 }
-
-label {
+label{
   user-select: none;
-  cursor: pointer;
 }
 label:hover {
   background: blue;
+}
+input[data-state='1']+label{
+  cursor: pointer;
 }
 
 .contain {
   background: gray;
   display: grid;
 }
-
 .main {
   min-width: 300px;
   width: 100%;
   background: red;
 
 }
-
 .interface {
   min-width: 300px;
   width: 100%;
 
 }
-
 .sub {
   min-width: 300px;
   width: 100%;

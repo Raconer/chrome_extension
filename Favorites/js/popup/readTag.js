@@ -15,9 +15,19 @@ function getUl(id) {
 }
 
 function subId() {
-  return $('input:hidden[id=sub_id]').val();
+  return $('input:hidden[name=sub_id]').val();
+}
+function subTitle() {
+  return $('input:text[name=sub_title]').val();
+}
+function subState() {
+  return $('input:radio[name=sub_state]:checked').val();
 }
 
 function outPutLength() {
   return $('.main input:radio[name=list]').length;
+}
+
+function getSibling(curLabel) {
+  return curLabel.siblings('input:radio[name=list]');
 }
