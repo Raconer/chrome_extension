@@ -2,6 +2,7 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
 ul {
   padding: 0 0 0 10px;
   margin: 0px;
@@ -29,6 +30,7 @@ input[data-state='1']+label{
   background: gray;
   display: grid;
 }
+
 .main {
   min-width: 300px;
   width: 100%;

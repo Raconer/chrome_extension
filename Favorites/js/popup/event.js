@@ -42,7 +42,6 @@ $(document).ready(function() {
         data.open = 1;
         open = 'block';
       }
-      getUl(id).children('ul').data('open', data.open);
       getUl(id).children('ul').css('display', open);
       saveData(data);
     }
