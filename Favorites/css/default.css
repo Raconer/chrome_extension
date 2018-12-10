@@ -48,6 +48,6 @@ input[data-state='1']+label{
 }
 
 /***drop down css***/
-ul li~ul[data-open='0']{
-  display: none;
+ul li~ul[data-open='1']{
+  display: block;
 }

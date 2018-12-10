@@ -21,7 +21,7 @@ function onLoadList(){
     listHtml = mkHtmlList(dataList);
   }
   $('.main').append(listHtml);
-  $('ul[data-open=1]').children('ul').css('display','block');
+  $('ul[data-open=0]').children('ul').css('display','none');
   interfaceSetting(true);
 }
 
