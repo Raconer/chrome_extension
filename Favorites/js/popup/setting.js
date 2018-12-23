@@ -1,6 +1,9 @@
 // get Data List
 function getDataList() {
   var dataList = localStorage.getItem('WebDataList');
+  if(!dataList){
+    return new Array();
+  }
   return JSON.parse(dataList);
 }
 // get Data
@@ -42,6 +45,7 @@ function saveData(data) {
 
 // Data Remove
 function remove(removeId){
+
     var dataList = getDataList();
     var i = 0;
     var index = dataList.findIndex(function(data){

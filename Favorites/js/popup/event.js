@@ -54,13 +54,15 @@ $(document).ready(function() {
   });
 
   $(document).on('change', 'input:radio[name=list]', function(){
-    var data = getData(this.id);
+    interfaceMode();
+    /*var data = getData(this.id);
+
     if(!data.state){
       $('#sub_id').val(data.id);
       $('#sub_title').val(data.name);
       $('#sub_url').val(data.url);
       $('#sub_des').val(data.describe);
-    }
+    }*/
   });
 
   // Data Setting Event
@@ -119,9 +121,7 @@ $(document).ready(function() {
     saveDataJSON.url = data.sub_url;
     saveDataJSON.state = data.sub_state;
     saveDataJSON.level = getInput(saveDataJSON.id).data('level');
-
     saveData(saveDataJSON);
-
   });
 
   // sub_cancel
@@ -132,12 +132,14 @@ $(document).ready(function() {
   // sub_delete event
   $(document).on('click', 'input:button[id=sub_del]', function(){
     var id = subId();
-    var parent = getInput(id).parents('ul').eq(0);
-    parent.remove();
-    remove(id);
-    resetId();
-    listDisabled(false);
-    interfaceMode();
+    var child = getChild(id);
+    var confirmflag = true;
+    if(child.length > 1){
+       confirmflag = confirm("Do you want to delete all the information that belongs to the folder?");
+    }
+    if(confirmflag){
+        deleteData(child);
+    }
   });
 
   $(document).on('input', 'input:text', function(){
@@ -150,9 +152,24 @@ $(document).ready(function() {
     }
   });
 
-  $(document).on('change', 'input:radio[name=sub_state]', function(){
-    var state = getDataState(this.value);
+
+  $(document).on('click', 'input:radio[name=sub_state]', function(){
+    console.log("1 : " + this.value);
     var id = subId();
+    if(getChild(id).length > 1){
+      alert('If there is added data, it can not be changed.');
+      /*event 종류*/
+      // event.preventDefault() : 현재 이벤트의 기본 동작을 중단한다.
+      // event.stopPropagation() : 현재 이벤트가 상위로 전파되지 않도록 중단한다.
+      // event.stopImmediatePropagation() : 현재 이벤트가 상위뿐 아니라 레벨에 걸린 다른 이벤트도 동작하지 않도록 중단한다.
+      event.preventDefault();
+    }
+  });
+
+  $(document).on('change', 'input:radio[name=sub_state]', function(){
+    var id = subId();
+    //var state = getDataState(this.value);
+    setUrl(true);
     $("label[for="+id+"]").html(getDataTitle());
   });
 });

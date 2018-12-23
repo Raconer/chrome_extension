@@ -72,11 +72,15 @@ function subDataSetting(data, isNew) { // id, isNew(newData : true, existing dat
   }
 
   $('.sub').load('./sub.html', data, function() {
-    $('#sub_id').val(data.id);
-    $('#sub_title').val(data.name);
-    $('#sub_url').val(data.url);
-    $('#sub_des').val(data.describe);
+    var state = data.state
+    setUrl(state)
+    $('#sub_id').val(data.id)
+    $('#sub_title').val(data.name)
+    $('#sub_des').val(data.describe)
+    $('#sub_s'+(state?'Dir':'Url')).attr("checked", true)
+    $('#sub_url').val(data.url)
     if(isNew){
+      setListName(data.id);
       $('#cancel').remove();
     }
   });
@@ -88,10 +92,13 @@ function subDetach() {
 }
 // interface show
 function interfaceSetting(screen) {
+  //console.log($('.main').html());
   if(screen){
-      $('.interface').load('./interface.html');
+    $('.interface').load('./interface.html');
+    
   }else{
     $('.interface_div').detach();
+
   }
 }
 
@@ -144,4 +151,26 @@ function getDataState(state) {
 function getDataTitle() {
   return getDataState(subState())+subTitle();
   //$("label[for="+id+"]").html(this.value);
+}
+
+function setListName(id) {
+  $("label[for="+id+"]").html(getDataTitle());
+}
+
+function deleteData(child) {
+  var parent = getInput(child[0]).parents('ul').eq(0);
+
+  parent.remove();
+  for(var i in child){
+      remove(child[0]);
+  }
+  resetId();
+  listDisabled(false);
+  interfaceMode();
+}
+
+function setUrl(state) {
+  if(state){
+    $('input:text[name=sub_url]').toggle();
+  }
 }

@@ -17,9 +17,11 @@ function getUl(id) {
 function subId() {
   return $('input:hidden[name=sub_id]').val();
 }
+
 function subTitle() {
   return $('input:text[name=sub_title]').val();
 }
+
 function subState() {
   return $('input:radio[name=sub_state]:checked').val();
 }
@@ -30,4 +32,13 @@ function outPutLength() {
 
 function getSibling(curLabel) {
   return curLabel.siblings('input:radio[name=list]');
+}
+
+function getChild(id){
+  var child = jQuery.makeArray(getUl(id).find('input'))
+  var childId = []
+  for(var i in child){
+    childId.push(child[i].id)
+  }
+  return childId
 }

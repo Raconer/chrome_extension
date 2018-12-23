@@ -51,11 +51,11 @@ $(document).ready(function() {
   $('input[name=set]').on('click', function() {
     event.preventDefault();
 
-    localStorage.clear();
-  /*  var thisData = rowData();
+    //localStorage.clear();
+    var thisData = rowData();
 
     thisData.id = thisData.attr('id');
-    subController(1, formDataSet(thisData));*/
+    subController(1, formDataSet(thisData));
   });
 
   // Sub Cancel Event
